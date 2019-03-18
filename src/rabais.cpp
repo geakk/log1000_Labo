@@ -8,7 +8,7 @@ Rabais::Rabais(std::string fichier_clients){
 void Rabais::lireFichier(std::string fichier_clients) {
 	// Ouverture du fichier.
   	std::ifstream infile(fichier_clients);
-
+	
 	// L'objet qui contiendra la ligne lue.
   	std::string line;
 
@@ -21,7 +21,7 @@ void Rabais::lireFichier(std::string fichier_clients) {
 		// Extraction des informations de la ligne lue dans le fichier.
 		std::string id_string;
 		std::getline(lineStream, id_string, ' ');
-		
+
 		std::string nom;
 		std::getline(lineStream, nom, ' ');
 		
@@ -46,7 +46,6 @@ void Rabais::lireFichier(std::string fichier_clients) {
 		// Transformation des strings en valeurs numériques.
 		int id = std::stoi(id_string);
 		int age = std::stoi(age_string);
-		
 		// Construction de la date d'adhésion
 		tm adhesion;
 		adhesion.tm_year = std::stoi(annee_string) - 1900;
@@ -84,7 +83,6 @@ float Rabais::getRabais(Facture f, int code_client) {
 	float rabais = 0;
 	
 	Client* le_client = this->clients[code_client];
-	
 	// Les ID de plus de 90000 représentent les employéEs.
 	if (le_client->getID() > 90000) {
 		rabais = 0.2;

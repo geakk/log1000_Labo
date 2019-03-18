@@ -2,6 +2,10 @@
 # Fichier exécutable produit
 EXEC=typerabais
 
+# Fichier executable test
+EXECTEST=typerabais_test
+TESTS=test
+
 # Répertoire contenant les fichiers source
 SOURCE=src
 
@@ -51,6 +55,25 @@ $(BINAIRE)/afficheur.o: $(SOURCE)/afficheur.cpp $(SOURCE)/afficheur.h $(SOURCE)/
 # ===========
 # Utilitaires
 # ===========
+
+test: $(TESTS)/$(BINAIRE)/$(EXECTEST)
+	./$(TESTS)/$(BINAIRE)/$(EXECTEST)
+
+$(TESTS)/$(BINAIRE)/$(EXECTEST): $(TESTS)/$(BINAIRE)/main.o $(TESTS)/$(BINAIRE)/rabais_test.o $(BINAIRE)/rabais.o $(BINAIRE)/client.o $(BINAIRE)/facture.o $(BINAIRE)/afficheur.o
+	g++ -o $@ $^ -lcppunit
+
+$(BINAIRE)/rabais.o: $(SOURCE)/rabais.cpp $(SOURCE)/rabais.h $(SOURCE)/client.h $(SOURCE)/facture.h
+	g++ -o $@ -c $<
+
+$(TESTS)/$(BINAIRE)/main.o: $(TESTS)/$(SOURCE)/main.cpp $(TESTS)/$(SOURCE)/rabais_test.h
+	mkdir -p $(TESTS)/$(BINAIRE)
+	g++ -o $@ -c $<
+
+$(TESTS)/$(BINAIRE)/rabais_test.o: $(TESTS)/$(SOURCE)/rabais_test.cpp $(TESTS)/$(SOURCE)/rabais_test.h $(SOURCE)/rabais.h
+	g++ -o $@ -c $<
+
+$(TESTS)/$(BINAIRE)/rabais.o: $(SOURCE)/rabais.cpp $(SOURCE)/rabais.h
+	g++ -o $@ -c $<
 
 
 # Enlève l'exécutable et les fichiers objets intermédiaires.
