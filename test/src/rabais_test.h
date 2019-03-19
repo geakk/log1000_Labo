@@ -21,12 +21,17 @@ public:
     void tearDown();
     
     // Fonctions de tests
+    void test_code_postal_invalide();
+    void test_code_postal_G0X();
+    void test_code_postal_H4L();
+    void test_code_postal_H2X();
     void test_code_client_plus_petit();
     void test_code_client_plus_grand();
     void test_code_client_egal();
     void test_modulo_diviseur_positif();
     void test_modulo_diviseur_tres_positif();
     void test_dumb();
+
 };
 
 
