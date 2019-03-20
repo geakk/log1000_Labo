@@ -10,6 +10,13 @@ class GetRabaisTest : public CppUnit::TestFixture
     CPPUNIT_TEST(test_dumb);
     CPPUNIT_TEST(test_code_client_plus_petit);
     CPPUNIT_TEST(test_code_client_plus_grand);
+    CPPUNIT_TEST(test_code_postal_G0X);
+    CPPUNIT_TEST(test_code_postal_H4L);
+    CPPUNIT_TEST(test_code_postal_H2X);
+    CPPUNIT_TEST(test_code_postal_invalide);
+    /*
+    CPPUNIT_TEST(test_code_client_plus_grand);
+    */
     CPPUNIT_TEST_SUITE_END();
     
 private:
@@ -28,8 +35,7 @@ public:
     void test_code_client_plus_petit();
     void test_code_client_plus_grand();
     void test_code_client_egal();
-    void test_modulo_diviseur_positif();
-    void test_modulo_diviseur_tres_positif();
+    
     void test_dumb();
 
 };
