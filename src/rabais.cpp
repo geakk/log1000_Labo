@@ -80,6 +80,7 @@ void Rabais::ajouterClient(Client* c) {
 
 float Rabais::getRabais(Facture f, int code_client) {
 
+	
 	float rabais = 0;
 	
 	Client* le_client = this->clients[code_client];
