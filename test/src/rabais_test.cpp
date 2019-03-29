@@ -1,19 +1,23 @@
 #include "rabais_test.h"
 
-void GetRabaisTest::setUp() {
+void GetRabaisTest::setUp() 
+{
 		this->objet_a_tester = new Rabais("data/clients.dat");
 }
 
-void GetRabaisTest::tearDown() {
+void GetRabaisTest::tearDown() 
+{
 		delete this->objet_a_tester;
 }
 
-void GetRabaisTest::test_dumb(){
+void GetRabaisTest::test_dumb()
+{
     CPPUNIT_ASSERT_EQUAL(0,0);
 }
 
     //Test que le rabais pour un employe est de 20%
-void GetRabaisTest::test_code_client_plus_grand(){
+void GetRabaisTest::test_code_client_plus_grand()
+{
     tm dateTest;
     dateTest.tm_year = 1998;
     dateTest.tm_mon = 1;
@@ -22,24 +26,12 @@ void GetRabaisTest::test_code_client_plus_grand(){
     Facture facture;
     objet_a_tester->ajouterClient(clientTest);
     float rabais = this->objet_a_tester->getRabais(facture, clientTest->getID());
+   
     CPPUNIT_ASSERT_EQUAL_MESSAGE("Un rabais invalide est assigne selon le code client", 0.2f,rabais);
-   // delete clientTest;
 }
-/*
-    //Test que le rabais pour un client est pas 20%
-void GetRabaisTest::test_code_client_plus_petit(){
-    tm dateTest;
-    dateTest.tm_year = 2019;
-    dateTest.tm_mon = 1;
-    dateTest.tm_mday = 1;
-    Client* clientTest = new Client(1000, "Client", "Test", 25, "H7Y", dateTest);
-    Facture facture;
-    objet_a_tester->ajouterClient(clientTest);
-    float rabais = this->objet_a_tester->getRabais(facture, clientTest->getID());
-    CPPUNIT_ASSERT_EQUAL_MESSAGE("Un rabais invalide est assigne selon le code client", 0.05f,rabais);
-}*/
 
-void GetRabaisTest::test_code_postal_G0X(){
+void GetRabaisTest::test_code_postal_G0X()
+{
     tm dateTest;
     dateTest.tm_year = 2019;
     dateTest.tm_mon = 1;
@@ -53,7 +45,8 @@ void GetRabaisTest::test_code_postal_G0X(){
 }
 
 
-void GetRabaisTest::test_code_postal_H4L(){
+void GetRabaisTest::test_code_postal_H4L()
+{
     tm dateTest;
     dateTest.tm_year = 2019;
     dateTest.tm_mon = 1;
@@ -81,21 +74,8 @@ void GetRabaisTest::test_code_postal_H2X()
     CPPUNIT_ASSERT_EQUAL_MESSAGE("Un rabais invalide est assigne selon la zone a un client", 0.01f, rabais);
 }
 
-/*
-void GetRabaisTest::test_code_postal_invalide(){
-    tm dateTest;
-    dateTest.tm_year = 2019;
-    dateTest.tm_mon = 1;
-    dateTest.tm_mday = 1;
-    Client* clientTest = new Client(1004, "Client", "Test", 25, "H6T", dateTest);
-    Facture facture;
-    objet_a_tester->ajouterClient(clientTest);
-    float rabais = this->objet_a_tester->getRabais(facture, clientTest->getID());
-
-    CPPUNIT_ASSERT_EQUAL_MESSAGE("Un rabais invalide est assigne selon la zone a un client", 0.00f, rabais);
-}*/
-
- void GetRabaisTest::test_age_client(){
+void GetRabaisTest::test_age_client()
+{
     tm dateTest;
     dateTest.tm_year = 2019;
     dateTest.tm_mon = 1;
@@ -106,10 +86,10 @@ void GetRabaisTest::test_code_postal_invalide(){
     float rabais = this->objet_a_tester->getRabais(facture, clientTest->getID());
 
     CPPUNIT_ASSERT_EQUAL_MESSAGE("Un rabais invalide est assigne selon l'age du client", 0.05f, rabais);
-
 }
 
-void GetRabaisTest::test_date_adhesion(){
+void GetRabaisTest::test_date_adhesion()
+{
     tm dateTest;
     dateTest.tm_year = 1998;
     dateTest.tm_mon = 1;
@@ -122,7 +102,8 @@ void GetRabaisTest::test_date_adhesion(){
     CPPUNIT_ASSERT_EQUAL_MESSAGE("Un rabais invalide est assigne selon la date d'adhesion", 0.05f, rabais);
 }
     
-void GetRabaisTest::test_montant_facture(){
+void GetRabaisTest::test_montant_facture()
+{
     tm dateTest;
     dateTest.tm_year = 2019;
     dateTest.tm_mon = 1;

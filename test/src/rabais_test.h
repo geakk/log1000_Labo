@@ -34,7 +34,6 @@ public:
     void test_age_client();
     void test_date_adhesion();
     void test_montant_facture();
-    
     void test_dumb();
 
 };
