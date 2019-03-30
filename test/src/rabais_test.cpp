@@ -22,7 +22,7 @@ void GetRabaisTest::test_code_client_plus_grand()
     dateTest.tm_year = 1998;
     dateTest.tm_mon = 1;
     dateTest.tm_mday = 1;
-    Client* clientTest = new Client(100000, "Paul", "Paul", 26, "H4R", dateTest);
+    Client* clientTest = new Client(100000, "Paul", "Paul", 69, "H4R", dateTest);
     Facture facture;
     objet_a_tester->ajouterClient(clientTest);
     float rabais = this->objet_a_tester->getRabais(facture, clientTest->getID());
