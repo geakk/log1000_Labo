@@ -1,11 +1,14 @@
 
-article: Emission.o main.o
-	g++ -o Emission main.o Emission.o 
+article: Emission.o main.o Chaine.o
+	g++ -o Emission main.o Emission.o Chaine.o
 
-Emission.o: Emission.cpp Emission.h
+Emission.o: Emission.cpp Emission.h Chaine.h
 	g++ -o Emission.o -c Emission.cpp
 
-main.o: main.cpp Emission.h
+Chaine.o: Chaine.cpp Chaine.h
+	g++ -o Chaine.o -c Chaine.cpp
+
+main.o: main.cpp Emission.h Chaine.h
 	g++ -o main.o -c main.cpp
  
 clean: 

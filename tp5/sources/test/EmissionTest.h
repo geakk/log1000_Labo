@@ -46,11 +46,12 @@ private:
 
 void EmissionTest::testgetters(void)
 {
+
     string titre = ems->getTitre();
     string animateur = ems->getAnimateur();
-    string chaineName = ems->getChaineName();
-    string chaineCodePostal = ems->getChaineCodePostal();
-    string chaineAddress = ems->getChaineAddress();
+    string chaineName = ems->getChaine()->getName();
+    string chaineCodePostal = ems->getChaine()->getCodePostal();
+    string chaineAddress = ems->getChaine()->getAddress();
     
     if (titre == "titreTest"
         && animateur == "animateurTest"

@@ -1,7 +1,7 @@
 CXX = g++
 INCLUDES= -I./
 CXXFLAGS = -g $(INCLUDES)
-SRCM= ../Emission.cpp
+SRCM= ../Emission.cpp ../Chaine.cpp
 OBJM = $(SRCM:.cpp=.o)
 LINKFLAGS= -lcppunit
 

@@ -5,70 +5,60 @@
 
 // Constructeur
 Emission::Emission (string titre,
-                  string animateur,
-                  string chaineName,
-                  string chaineCodePostal,
-                  string chaineAddress) {
+                    string animateur,
+                    string nomChaine, 
+                    string codePostalChaine,
+                    string addressChaine) {
     // Emission information
-    this->titre = titre;
-    this->animateur = animateur;
-    
-    // Chaine information
-    this->chaineName = chaineName;
-    this->chaineCodePostal = chaineCodePostal;
-    this->chaineAddress = chaineAddress;
-    
+    titre_ = titre;
+    animateur_ = animateur;
+    chaine_ = new Chaine(nomChaine, codePostalChaine, addressChaine);
+}
+
+Emission::Emission(){}
+
+
+Emission::~Emission()
+{
+    delete chaine_;
 }
 
 // Setters
 void Emission::setTitre(string titre) {
-    this->titre = titre;
+    titre_ = titre;
 }
 void Emission::setAnimateur(string animateur) {
-    this->animateur = animateur;
+    animateur_ = animateur;
 }
 
 // Associer un chaine à l'Emission
-void Emission::associerChaine (string chaineName,
-                               string chaineCodePostal,
-                               string chaineAddress) {
-    this->chaineName = chaineName;
-    this->chaineCodePostal = chaineCodePostal;
-    this->chaineAddress = chaineAddress;
+void Emission::setChaine (Chaine* chaine) {
+    chaine_ = chaine;
 }
 
 
 // Getters
-string Emission::getTitre() {
-    return this->titre;
+string Emission::getTitre() const{
+    return titre_;
 }
-string Emission::getAnimateur() {
-    return this->animateur;
-}
-
-string Emission::getChaineName() {
-    return this->chaineName;
+string Emission::getAnimateur() const{
+    return animateur_;
 }
 
-string Emission::getChaineCodePostal() {
-    return this->chaineCodePostal;
+Chaine* Emission::getChaine() const{
+    return chaine_;
 }
-
-string Emission::getChaineAddress() {
-    return this->chaineAddress;
-}
-
 
 // Enregistrer l'Emission dans un fichier
 void Emission::saveEmission (string fileName) {
 
     ofstream outfile (fileName.c_str(), std::ofstream::binary | std::fstream::app);
     // write to outfile
-    outfile<<this->titre <<","
-                   <<this->animateur <<","
-                   <<this->chaineName << ","
-                   <<this->chaineCodePostal << ","
-                   <<this->chaineAddress <<"\n";
+    outfile<< titre_ <<","
+                   << animateur_ <<","
+                   << (*chaine_).getName() << ","
+                   << (*chaine_).getCodePostal() << ","
+                   << (*chaine_).getAddress() <<"\n";
  
     outfile.close();
 }
@@ -157,11 +147,11 @@ Emission* Emission::trouverEmission (string DB, string titre) {
 
 // Afficher l'Emission
 void Emission::afficher() {
-    std::cout << "Titre : " << this->titre << std::endl;
-    std::cout << "Animateur : " << this->animateur << std::endl;
-    std::cout << "Chaine name : " << this->chaineName << std::endl;
-    std::cout << "Chaine code postale : " << this->chaineCodePostal << std::endl;
-    std::cout << "Chaine address : " << this->chaineAddress << std::endl;
+    std::cout << "Titre : " << titre_ << std::endl;
+    std::cout << "Animateur : " << animateur_ << std::endl;
+    std::cout << "Chaine name : " << (*chaine_).getName()  << std::endl;
+    std::cout << "Chaine code postale : " << (*chaine_).getCodePostal() << std::endl;
+    std::cout << "Chaine address : " << (*chaine_).getAddress() << std::endl;
 }
 
 

@@ -2,6 +2,7 @@
 #define Emission_H
 
 #include <string>
+#include "Chaine.h"
 
 using namespace std;
         
@@ -9,22 +10,19 @@ using namespace std;
 class Emission {
 public:
     // Constructeurs
-    Emission () {}
+    Emission();
     Emission(string, string, string, string, string);
+    ~Emission();
     
     // Setters
     void setTitre(string);
     void setAnimateur(string);
-    
-    void associerChaine(string, string, string);
+    void setChaine(Chaine* chaine);
     
     // Getters
-    string getTitre();
-    string getAnimateur();
-    
-    string getChaineName();
-    string getChaineCodePostal();
-    string getChaineAddress();
+    string getTitre() const;
+    string getAnimateur() const;
+    Chaine* getChaine() const;
     
     // Enregistrer l'Emission
     void saveEmission(string);
@@ -35,15 +33,9 @@ public:
     
 private:
     // Information sur l'emission
-    string titre;
-    string animateur;
-	
-    
-    // Informations sur la chaine de l'emission
-    string chaineName;
-    string chaineCodePostal;
-    string chaineAddress;
-    
+    string titre_;
+    string animateur_;
+    Chaine* chaine_;
 };
 
 #endif 
