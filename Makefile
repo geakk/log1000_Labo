@@ -29,28 +29,28 @@ all: $(BINAIRE)/$(EXEC)
 
 # Fait le "linking" entre les fichiers objets pour produire l'exécutable
 $(BINAIRE)/$(EXEC): $(BINAIRE)/main.o $(BINAIRE)/client.o $(BINAIRE)/rabais.o $(BINAIRE)/facture.o $(BINAIRE)/afficheur.o
-	g++ -o $@ $^ 
+	g++ -no-pie -o $@ $^ 
 
 # Compile le "main" pour produire le fichier objet.
 $(BINAIRE)/main.o: $(SOURCE)/main.cpp $(SOURCE)/rabais.h $(SOURCE)/facture.h
 	mkdir -p $(BINAIRE)
-	g++ -o $@ -c $<
+	g++ -no-pie -o $@ -c $<
 
 # Compile la classe Client pour produire le fichier objet.
 $(BINAIRE)/client.o: $(SOURCE)/client.cpp $(SOURCE)/client.h
-	g++ -o $@ -c $<
+	g++ -no-pie -o $@ -c $<
 
 # Compile la classe Rabais pour produire le fichier objet.
 $(BINAIRE)/rabais.o: $(SOURCE)/rabais.cpp $(SOURCE)/rabais.h $(SOURCE)/client.h $(SOURCE)/facture.h
-	g++ -o $@ -c $<
+	g++ -no-pie -o $@ -c $<
 
 # Compile la classe Facture pour produire le fichier objet.
 $(BINAIRE)/facture.o: $(SOURCE)/facture.cpp $(SOURCE)/facture.h
-	g++ -o $@ -c $<
+	g++ -no-pie -o $@ -c $<
 
 # Conmpile la classe Afficheur pour produire le fichier objet.
 $(BINAIRE)/afficheur.o: $(SOURCE)/afficheur.cpp $(SOURCE)/afficheur.h $(SOURCE)/rabais.h $(SOURCE)/facture.h
-	g++ -o $@ -c $<
+	g++ -no-pie -o $@ -c $<
 
 # ===========
 # Utilitaires
@@ -60,20 +60,20 @@ test: $(TESTS)/$(BINAIRE)/$(EXECTEST)
 	./$(TESTS)/$(BINAIRE)/$(EXECTEST)
 
 $(TESTS)/$(BINAIRE)/$(EXECTEST): $(TESTS)/$(BINAIRE)/main.o $(TESTS)/$(BINAIRE)/rabais_test.o $(BINAIRE)/rabais.o $(BINAIRE)/client.o $(BINAIRE)/facture.o $(BINAIRE)/afficheur.o
-	g++ -o $@ $^ -lcppunit
+	g++ -no-pie -o $@ $^ -lcppunit
 
 $(BINAIRE)/rabais.o: $(SOURCE)/rabais.cpp $(SOURCE)/rabais.h $(SOURCE)/client.h $(SOURCE)/facture.h
-	g++ -o $@ -c $<
+	g++ -no-pie -o $@ -c $<
 
 $(TESTS)/$(BINAIRE)/main.o: $(TESTS)/$(SOURCE)/main.cpp $(TESTS)/$(SOURCE)/rabais_test.h
 	mkdir -p $(TESTS)/$(BINAIRE)
-	g++ -o $@ -c $<
+	g++ -no-pie -o $@ -c $<
 
 $(TESTS)/$(BINAIRE)/rabais_test.o: $(TESTS)/$(SOURCE)/rabais_test.cpp $(TESTS)/$(SOURCE)/rabais_test.h $(SOURCE)/rabais.h
-	g++ -o $@ -c $<
+	g++ -no-pie -o $@ -c $<
 
 $(TESTS)/$(BINAIRE)/rabais.o: $(SOURCE)/rabais.cpp $(SOURCE)/rabais.h
-	g++ -o $@ -c $<
+	g++ -no-pie -o $@ -c $<
 
 
 # Enlève l'exécutable et les fichiers objets intermédiaires.
