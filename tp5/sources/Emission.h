@@ -30,6 +30,8 @@ public:
     void afficher();
     // Chercher un Emission dans une base de données par titre
     Emission* trouverEmission(string, string);
+
+    string lireDonnee(int &i,string line);
     
 private:
     // Information sur l'emission

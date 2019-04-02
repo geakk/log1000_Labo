@@ -63,6 +63,19 @@ void Emission::saveEmission (string fileName) {
     outfile.close();
 }
 
+string Emission::lireDonnee(int &i, string line)
+{
+    string mot;
+    for (i = i + 1; i < line.length(); i++)
+    {
+        if (line[i] != ',')
+            mot += line[i];
+        else
+            break;
+    }
+    return mot;
+}
+
 // Trouver un Emission avec son nom dans la base de données DB
 Emission* Emission::trouverEmission (string DB, string titre) {
     
@@ -74,61 +87,14 @@ Emission* Emission::trouverEmission (string DB, string titre) {
         string line;
         // Lire les Emissions, un Emission par ligne dans la base de données (DB.txt)
         while (getline(fichier, line)) {
-            string titreDB;
-            // Récupérer le nom de l'Emission
-            int i = 0;
-            for (i = 0 ; i < line.length() ; i++) {
-                if (line[i] != ',') {
-                    titreDB += line[i];
-                } else {
-                    break;
-                }
-            }
-          
-            
-            // Si l'Emission qu'on lit actuellement est celui qu'on cherche
-            if (titreDB == titre) {
-                
-                // Récupérer le nom de l'animateur
-                string animateurDB;
-                for (i = i + 1; i < line.length() ; i++) {
-                    if (line[i] != ',') {
-                        animateurDB += line[i];
-                    } else {
-                        break;
-                    }
-                }
-                
-                //  Récupérer le nom de l'éditeur
-                string chaineNameDB;
-                for (i = i + 1; i < line.length() ; i++) {
-                    if (line[i] != ',') {
-                        chaineNameDB += line[i];
-                    } else {
-                        break;
-                    }
-                }
-                
-                // Récupérer le code postale de l'éditeur
-                string chaineCodePostalDB;
-                for (i = i + 1; i < line.length() ; i++) {
-                    if (line[i] != ',') {
-                        chaineCodePostalDB += line[i];
-                    } else {
-                        break;
-                    }
-                }
-                
-                // Récupérer l'addresse de l'éditeur
-                string chaineAddressDB;
-                for (i = i + 1; i < line.length() ; i++) {
-                    if (line[i] != ',') {
-                        chaineAddressDB += line[i];
-                    } else {
-                        break;
-                    }
-                }
-               
+            int i = -1;
+            string titreDB = lireDonnee(i,line); 
+            if(titreDB == titre) { // Si l'Emission qu'on lit actuellement est celui qu'on cherche
+
+                string animateurDB = lireDonnee(i,line); // Récupérer le nom de l'animateur
+                string chaineNameDB = lireDonnee(i,line);  //  Récupérer le nom de l'éditeur
+                string chaineCodePostalDB = lireDonnee(i,line);  // Récupérer le code postale de l'éditeur
+                string chaineAddressDB = lireDonnee(i,line);   // Récupérer l'addresse de l'éditeur
                 // Créer un objet de type Emission avec les informations récupérées
                 Emission *a = new Emission(titreDB, animateurDB, chaineNameDB, chaineCodePostalDB, chaineAddressDB);
                 // Fermer la base de données
@@ -142,7 +108,6 @@ Emission* Emission::trouverEmission (string DB, string titre) {
     }
     // Si l'Emission est innexistant, on retourne NULL
     return NULL;
-
 }
 
 // Afficher l'Emission
