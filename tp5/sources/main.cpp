@@ -9,7 +9,6 @@ using namespace std;
 int main(int argc, char** argv) {
     
     Emission* emission = new Emission(); // Création d'un emission
-    string DBFile = "DB.txt"; // Fichier qui contient une base des emissions
     int choix; // Opération séléctionnée par l'utilisateur
    
     do {
@@ -57,10 +56,10 @@ int main(int argc, char** argv) {
                 std::cout << "Saisir le titre de titre l'émission : " ;
                 std::cin >> titre;
                 // Chercher l'emission
-                Emission* tmp = emission->trouverEmission(DBFile, titre);
+                Emission* tmp = emission->trouverEmission("DB.txt", titre);
                 if (tmp != NULL) {// Si l'emission est trouvé
                     emission = tmp;
-		     std::cout << "Emission trouvée !" << std::endl;	
+		         std::cout << "Emission trouvée !" << std::endl;	
                 } else {
                     std::cout << "Aucune émission trouvée !" << std::endl;
                 }
@@ -80,8 +79,7 @@ int main(int argc, char** argv) {
             {
                 // Enregistrer l'emission dans la base de données.
                 if (emission != NULL) {
-		    	
-                    emission->saveEmission(DBFile);
+                    emission->saveEmission("DB.txt");
                     std::cout << "Emission enregistrée !" << std::endl;
                 }
             }
